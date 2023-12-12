@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Service App</title>
+    <link rel="stylesheet" href="../public/css/styles.css">
+</head>
+<body>
+    <article>
+        <form onsubmit="doScreenshot(); return false;">
+            <input type="url" name="url" placeholder="for example https://www.google.com" />
+            <button type="submit">Screenshot</button>
+        </form>
+        <img alt="your screenshot"/>
+    </article>
+
+    <script>
+        function doScreenshot() {
+            const url = document.querySelector('input').value;
+            if(!url) return;
+
+            const img = document.querySelector('img');
+            img.style.display = 'none';
+            img.src = '/screenshot?url' + encodeURIComponent(url);
+
+            img.onload = () => {
+                img.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
